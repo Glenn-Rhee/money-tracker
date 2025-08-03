@@ -1,7 +1,9 @@
-export default function Home() {
+import Container from "@/components/Container";
+
+export default async function Home() {
   return (
-    <div>
-      <h1>home</h1>
-    </div>
+   <Container>
+    <h1>Home</h1>
+   </Container>
   );
 }

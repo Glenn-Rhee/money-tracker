@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +28,6 @@ export const metadata: Metadata = {
     "MoneyTracker helps you record your daily income and expenses easily, quickly, and securely. Monitor your finances with weekly charts and reports.",
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1.0,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,6 +38,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

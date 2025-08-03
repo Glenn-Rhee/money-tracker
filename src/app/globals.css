@@ -10,3 +10,9 @@
 body {
     background-color: #FAF7F3;
 }
+
+ @media (width >= 64rem /* 1024px */) {
+    .my-container {
+        margin-left: 250px;
+    }
+ }
