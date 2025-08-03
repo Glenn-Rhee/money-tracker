@@ -8,7 +8,7 @@ interface ContainerProps {
 export default function Container(props: ContainerProps) {
   const { className, children } = props;
   return (
-    <div className={clsx("my-container mt-4", className)}>
+    <div className={clsx("my-container", className)}>
       <NavbarPhone />
       {children}
     </div>

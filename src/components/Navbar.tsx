@@ -19,7 +19,7 @@ export default function Navbar(props: NavbarProps) {
     <nav
       ref={ref}
       className={clsx(
-        "fixed top-0 py-2 px-2 z-30 left-0 bottom-0 border-r bg-white-primary border-slate-400 w-[15%] max-w-[250px]",
+        "fixed h-screen top-0 py-2 px-2 z-30 left-0 bottom-0 border-r bg-white-primary border-slate-400 w-[15%] max-w-[250px]",
         {
           "hidden lg:block": !isForMobile,
           "block w-[200px]": isForMobile,

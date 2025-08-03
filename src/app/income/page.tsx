@@ -1,7 +1,9 @@
+import Container from "@/components/Container";
+
 export default function IncomePage() {
   return (
-    <div>
+    <Container>
       <h1>Income</h1>
-    </div>
+    </Container>
   );
 }

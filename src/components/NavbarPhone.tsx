@@ -25,7 +25,7 @@ export default function NavbarPhone() {
 
   return (
     <>
-      <nav className="lg:hidden fixed top-0 text-2xl right-0 left-0 flex justify-between items-center px-3 py-2 bg-mypink-100 z-10">
+      <nav className="lg:hidden fixed top-0 text-2xl bg-mypink-100 right-0 left-0 flex justify-between items-center px-3 py-2">
         <button className="cursor-pointer" onClick={() => setIsOpen(true)}>
           <i className="ri-menu-2-line"></i>
         </button>
@@ -40,7 +40,7 @@ export default function NavbarPhone() {
             opacity: 1,
           },
           hide: {
-            x: -120,
+            x: -200,
             opacity: 0,
           },
         }}

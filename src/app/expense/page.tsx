@@ -1,7 +1,9 @@
+import Container from "@/components/Container";
+
 export default function ExpensePage() {
   return (
-    <div>
+    <Container>
       <h1>Expense</h1>
-    </div>
+    </Container>
   );
 }
