@@ -34,7 +34,7 @@ export default function Navbar(props: NavbarProps) {
           <i className="ri-close-large-line"></i>
         </button>
       ) : (
-        <h1 className="font-bold text-xl text-slate-900">
+        <h1 className="font-bold text-2xl text-slate-900">
           Expense <span className="text-green-500">Tracker</span>
         </h1>
       )}
