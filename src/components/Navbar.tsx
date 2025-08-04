@@ -2,38 +2,24 @@
 import { usePathname } from "next/navigation";
 import Items from "./navbar/Items";
 import clsx from "clsx";
-import { useNavbar } from "@/store/useNavbar";
 import { Ref } from "react";
-
+import { motion } from "framer-motion";
+import { useNavbar } from "@/store/useNavbar";
 interface NavbarProps {
   isForMobile?: boolean;
   ref?: Ref<HTMLElement>;
+  className?: string;
 }
 
 export default function Navbar(props: NavbarProps) {
-  const { isForMobile, ref } = props;
-  const { setIsOpen } = useNavbar();
+  const { isForMobile, ref, className } = props;
   const pathname = usePathname();
+  const { isOpen } = useNavbar();
   if (pathname.includes("/auth")) return null;
-  return (
-    <nav
-      ref={ref}
-      className={clsx(
-        "fixed h-screen top-0 py-2 px-2 z-30 left-0 bottom-0 border-r bg-white-primary border-slate-400 w-[15%] max-w-[250px]",
-        {
-          "hidden lg:block": !isForMobile,
-          "block w-[200px]": isForMobile,
-        }
-      )}
-    >
-      {isForMobile ? (
-        <button
-          onClick={() => setIsOpen(false)}
-          className="block mx-auto cursor-pointer justify-center text-center text-slate-800 text-2xl"
-        >
-          <i className="ri-close-large-line"></i>
-        </button>
-      ) : (
+
+  const content = (
+    <>
+      {isForMobile ? null : (
         <h1 className="font-bold text-2xl text-slate-900">
           Expense <span className="text-green-500">Tracker</span>
         </h1>
@@ -47,6 +33,43 @@ export default function Navbar(props: NavbarProps) {
         </div>
         <Items />
       </div>
+    </>
+  );
+
+  if (isForMobile) {
+    return isOpen ? (
+      <motion.nav
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -100, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        ref={ref}
+        className={clsx(
+          "fixed h-screen py-2 px-2 z-30 border-r bg-white-primary border-slate-400 w-[15%] max-w-[250px]",
+          {
+            "hidden lg:block": !isForMobile,
+            "block w-[200px]": isForMobile,
+          },
+          className
+        )}
+      >
+        {content}
+      </motion.nav>
+    ) : null;
+  }
+
+  return (
+    <nav
+      className={clsx(
+        "fixed h-screen py-2 px-2 z-30 border-r bg-white-primary border-slate-400 w-[15%] max-w-[250px]",
+        {
+          "hidden lg:block": !isForMobile,
+          "block w-[200px]": isForMobile,
+        },
+        className
+      )}
+    >
+      {content}
     </nav>
   );
 }
