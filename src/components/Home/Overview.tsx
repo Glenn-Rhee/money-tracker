@@ -1,8 +1,9 @@
+import CardShell from "../CardShell";
 import CardOverview from "./CardOverview";
 
 export default function Overview() {
   return (
-    <div className="px-2 py-4 grid grid-cols-3 bg-white-primary shadow-lg rounded-md mt-8">
+    <CardShell className="grid gap-x-4 grid-cols-3">
       <CardOverview
         icon="bank-card-line"
         title="Total Balance"
@@ -21,6 +22,6 @@ export default function Overview() {
         bgIcon="bg-rose-600"
         money={20000}
       />
-    </div>
+    </CardShell>
   );
 }

@@ -8,9 +8,9 @@ interface ContainerProps {
 export default function Container(props: ContainerProps) {
   const { className, children } = props;
   return (
-    <div className={clsx("my-container", className)}>
+    <>
       <NavbarPhone />
-      {children}
-    </div>
+      <div className={clsx("my-container pt-14 mx-4", className)}>{children}</div>
+    </>
   );
 }
