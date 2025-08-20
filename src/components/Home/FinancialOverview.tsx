@@ -23,7 +23,7 @@ export default function FinancialOverview() {
   };
   const options = {
     responsive: true,
-    cutout: "80%", // membuat doughnut (jika 0%, maka jadi pie chart)
+    cutout: "80%",
     plugins: {
       legend: {
         position: "bottom" as const,
@@ -36,7 +36,11 @@ export default function FinancialOverview() {
         Financial Overview
       </h4>
       <div className="w-full mt-2 flex items-center justify-center">
-        <Doughnut data={data} options={options} />
+        <Doughnut
+          className="max-w-xl aspect-square"
+          data={data}
+          options={options}
+        />
       </div>
     </CardShell>
   );

@@ -9,7 +9,7 @@ export default function CardShell(props: CardShellProps) {
   return (
     <div
       className={clsx(
-        "px-2 py-4 bg-white-primary shadow-lg rounded-md",
+        "px-2 py-4 bg-slate-200 shadow-lg rounded-md",
         className
       )}
     >
