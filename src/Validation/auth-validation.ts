@@ -16,7 +16,11 @@ export class AuthValidation {
     mobileNumber: z
       .string()
       .regex(/^08[0-9]{8,11}$/, "Mobile Number is invalid!"),
-    dateOfBirth: z.date({ error: "Invalid date!" }),
+    dateOfBirth: z
+      .string()
+      .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/, {
+        error: "Invalid date!",
+      }),
     password: z
       .string({ error: "Please fill password properly" })
       .min(8, { error: "Minimum length of password is 8" }),

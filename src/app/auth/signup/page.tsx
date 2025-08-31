@@ -17,12 +17,14 @@ export default function SignUpPage() {
     defaultValues: {
       email: "",
       confirmPassword: "",
-      dateOfBirth: new Date(),
+      dateOfBirth: "",
       fullName: "",
       mobileNumber: "",
       password: "",
     },
   });
+
+  console.log(form.watch("dateOfBirth"));
 
   async function handleSubmit(values: z.infer<typeof AuthValidation.SIGNUP>) {
     console.log(values);
@@ -73,7 +75,7 @@ export default function SignUpPage() {
             label="Date Of Birth"
             type="date"
             placeholder="DD / MM / YYYY"
-            error={form.formState.errors.mobileNumber?.message}
+            error={form.formState.errors.dateOfBirth?.message}
           />
 
           <InputGroup
