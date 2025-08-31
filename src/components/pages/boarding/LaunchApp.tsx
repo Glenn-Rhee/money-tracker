@@ -2,11 +2,12 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect } from "react";
-import Button from "./Button";
+import Button from "../../Button";
 import { motion } from "framer-motion";
-import PaginationDots from "./PaginationDots";
+import PaginationDots from "../../PaginationDots";
 import { useRouter } from "next/navigation";
 import { useLaunchStore } from "@/store/useLaunchStore";
+import Drawer from "@/components/Drawer";
 
 export default function LaunchApp() {
   const {
@@ -129,12 +130,7 @@ export default function LaunchApp() {
           Sign Up
         </Button>
       </div>
-      <div
-        className={clsx(
-          "fixed flex items-center flex-col justify-center gap-y-4 right-0 h-[70vh] left-0 bottom-0 rounded-tr-[4rem] rounded-tl-[4rem] bg-bggreen-whiteletter",
-          isLaunched && isBoarding ? "" : "hidden"
-        )}
-      >
+      <Drawer className={isLaunched && isBoarding ? "" : "hidden"}>
         <div className="w-full flex justify-center overflow-x-hidden items-center">
           <motion.div
             initial={{ x: 0, translateX: "50%", opacity: 1 }}
@@ -199,7 +195,7 @@ export default function LaunchApp() {
             <PaginationDots onclick={() => setPage(2)} isActive={page > 1} />
           </div>
         </div>
-      </div>
+      </Drawer>
     </div>
   );
 }

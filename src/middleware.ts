@@ -3,15 +3,15 @@ import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const cookieStore = await cookies();
-  const isLaunched = cookieStore.get("token");
+  const token = cookieStore.get("token");
 
   const url = req.nextUrl.pathname;
 
-  if (url === "/" && !isLaunched) {
+  if (url === "/" && !token) {
     return NextResponse.redirect(new URL("/boarding", req.url));
   }
 
-  if (url === "/boarding" && isLaunched) {
+  if ((url === "/boarding" || url.includes("/auth")) && token) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 }

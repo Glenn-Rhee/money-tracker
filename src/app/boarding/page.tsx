@@ -1,4 +1,4 @@
-import LaunchApp from "@/components/LaunchApp";
+import LaunchApp from "@/components/pages/boarding/LaunchApp";
 
 export default function BoardingPage() {
   return (
