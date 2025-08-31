@@ -1,16 +1,23 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes } from "react";
 
-export default function Button(props: ButtonHTMLAttributes<HTMLButtonElement>) {
+interface ButtonProps {
+  children?: React.ReactNode;
+  onclick?: () => void;
+  className?: string;
+  color?: "bg-maingreen" | "bg-lightgreen";
+}
+export default function Button(props: ButtonProps) {
+  const { children, onclick, className, color = "bg-maingreen" } = props;
   return (
     <button
-      {...props}
+      onClick={onclick}
       className={clsx(
-        "w-full bg-green-600 cursor-pointer hover:bg-green-700 active:scale-[0.985] active:bg-green-800 transition-all duration-100 text-white font-semibold text-lg rounded-md py-2",
-        props.className
+        "px-4 py-2 text-lettersIcon font-bold text-xl cursor-pointer active:scale-95 transition-all duration-100 rounded-3xl shadow-xl",
+        className,
+        color
       )}
     >
-      {props.children}
+      {children}
     </button>
   );
 }
