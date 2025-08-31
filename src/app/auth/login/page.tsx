@@ -52,7 +52,12 @@ export default function LoginPage() {
             error={form.formState.errors.password?.message}
           />
 
-          <Button type="submit" className="w-full mt-6">
+          <Button
+            onSubmit={() => form.handleSubmit(handleSubmit)()}
+            onClick={() => form.handleSubmit(handleSubmit)()}
+            type="submit"
+            className="w-full mt-6"
+          >
             Login
           </Button>
           <span className="text-sm block text-center font-medium text-lettersIcon">

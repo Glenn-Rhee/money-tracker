@@ -117,13 +117,13 @@ export default function LaunchApp() {
         )}
       >
         <Button
-          onclick={() => router.push("/auth/login")}
+          onClick={() => router.push("/auth/login")}
           className="w-[10rem] hover:bg-teal-500"
         >
           Log in
         </Button>
         <Button
-          onclick={() => router.push("/auth/signup")}
+          onClick={() => router.push("/auth/signup")}
           className="w-[10rem] border border-maingreen"
           color="bg-lightgreen"
         >
