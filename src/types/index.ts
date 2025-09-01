@@ -13,3 +13,8 @@ export interface CreateUser {
   password: string;
   confirmPassword: string;
 }
+
+export interface LoginUser {
+  email: string;
+  password: string;
+}

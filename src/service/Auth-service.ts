@@ -1,7 +1,7 @@
 import { ResponseError } from "@/error/Response-Error";
 import JWT from "@/lib/jwt";
 import { prisma } from "@/lib/prisma";
-import { CreateUser, ResponsePayload } from "@/types";
+import { CreateUser, LoginUser, ResponsePayload } from "@/types";
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { v4 as uuidv4 } from "uuid";
@@ -48,6 +48,32 @@ export default class AuthService {
       status: "success",
       statusCode: 201,
       message: "Successfully created one user",
+    };
+  }
+
+  static async login(data: LoginUser): Promise<ResponsePayload> {
+    const cookieStore = await cookies();
+    const user = await prisma.user.findFirst({ where: { email: data.email } });
+    if (!user) {
+      throw new ResponseError(404, "Email not found!");
+    }
+
+    const isPasswordMatch = await bcrypt.compare(data.password, user.password);
+    if (!isPasswordMatch) {
+      throw new ResponseError(401, "Wrong Password!");
+    }
+
+    const token = JWT.signIn({
+      email: user.email,
+      password: user.password,
+    });
+
+    cookieStore.set("token", token);
+
+    return {
+      status: "success",
+      statusCode: 200,
+      message: "Login Successfully!",
     };
   }
 }

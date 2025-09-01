@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
+import { ResponsePayload } from "./types";
 
 export async function middleware(req: NextRequest) {
   const cookieStore = await cookies();
@@ -14,6 +15,16 @@ export async function middleware(req: NextRequest) {
 
     if ((url === "/boarding" || url.includes("/auth")) && token) {
       return NextResponse.redirect(new URL("/", req.url));
+    }
+  }
+
+  if (url.includes("/api")) {
+    if (url.includes("/auth") && token) {
+      return NextResponse.json<ResponsePayload>({
+        status: "failed",
+        statusCode: 409,
+        message: "You are already logged in.",
+      });
     }
   }
 

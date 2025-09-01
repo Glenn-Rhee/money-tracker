@@ -1,20 +1,13 @@
 import { ResponseError } from "@/error/Response-Error";
-import AuthService from "@/service/auth-service/Auth-service";
+import AuthService from "@/service/Auth-service";
 import { CreateUser, ResponsePayload } from "@/types";
 import { AuthValidation } from "@/Validation/auth-validation";
 import { Validation } from "@/Validation/Validation";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token");
-    if (token) {
-      throw new ResponseError(409, "User already logged in!");
-    }
-
     const reqBody = (await req.json()) as CreateUser;
     const { confirmPassword, ...data } = Validation.validate(
       AuthValidation.SIGNUP,
