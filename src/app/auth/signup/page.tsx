@@ -55,6 +55,8 @@ export default function SignUpPage() {
         toast.error(error.message);
         return;
       }
+
+      toast.error("An error occured!");
     } finally {
       setLoading(false);
     }

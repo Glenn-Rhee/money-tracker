@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
+import { Toaster } from "react-hot-toast";
 
 const geistPoppins = Poppins({
   variable: "--font-poppins",
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistPoppins.variable} bg-maingreen antialiased`}>
+        <Toaster />
         {children}
       </body>
     </html>
