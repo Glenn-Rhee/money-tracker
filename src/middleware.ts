@@ -7,13 +7,17 @@ export async function middleware(req: NextRequest) {
 
   const url = req.nextUrl.pathname;
 
-  if (url === "/" && !token) {
-    return NextResponse.redirect(new URL("/boarding", req.url));
+  if (!url.includes("/api")) {
+    if (url === "/" && !token) {
+      return NextResponse.redirect(new URL("/boarding", req.url));
+    }
+
+    if ((url === "/boarding" || url.includes("/auth")) && token) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
   }
 
-  if ((url === "/boarding" || url.includes("/auth")) && token) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
+  return NextResponse.next();
 }
 
 export const matcher: MiddlewareConfig = {

@@ -4,13 +4,21 @@ import Drawer from "@/components/Drawer";
 import AuthShell from "@/components/pages/auth/AuthShell";
 import InputGroup from "@/components/pages/auth/InputGroup";
 import Title from "@/components/pages/auth/Title";
+import { ResponseError } from "@/error/Response-Error";
 import { AuthValidation } from "@/Validation/auth-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { useState } from "react";
+import { ResponsePayload } from "@/types";
+import { useRouter } from "next/navigation";
+import { PulseLoader } from "react-spinners";
 
 export default function SignUpPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof AuthValidation.SIGNUP>>({
     resolver: zodResolver(AuthValidation.SIGNUP),
     mode: "onChange",
@@ -24,10 +32,32 @@ export default function SignUpPage() {
     },
   });
 
-  console.log(form.watch("dateOfBirth"));
-
   async function handleSubmit(values: z.infer<typeof AuthValidation.SIGNUP>) {
-    console.log(values);
+    setLoading(true);
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = (await response.json()) as ResponsePayload;
+      if (data.status === "failed") {
+        throw new ResponseError(data.statusCode, data.message);
+      }
+
+      toast.success(data.message);
+      router.push("/");
+    } catch (error) {
+      if (error instanceof ResponseError) {
+        toast.error(error.message);
+        return;
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -100,9 +130,10 @@ export default function SignUpPage() {
             onSubmit={() => form.handleSubmit(handleSubmit)()}
             onClick={() => form.handleSubmit(handleSubmit)()}
             type="submit"
-            className="w-full mt-6"
+            disabled={loading}
+            className="w-full mt-6 py-3"
           >
-            Sign Up
+            {loading ? <PulseLoader /> : "Sign Up"}
           </Button>
 
           <span className="text-sm block text-center font-medium text-lettersIcon">

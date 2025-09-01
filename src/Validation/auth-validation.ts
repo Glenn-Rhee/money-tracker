@@ -14,10 +14,10 @@ export class AuthValidation {
       .min(1, { error: "Minimum length of full name is 1" }),
     email: z.email({ error: "Please fill email properly!" }),
     mobileNumber: z
-      .string()
+      .string({ error: "Please fill mobile number" })
       .regex(/^08[0-9]{8,11}$/, "Mobile Number is invalid!"),
     dateOfBirth: z
-      .string()
+      .string({ error: "Please fill date of birth!" })
       .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/, {
         error: "Invalid date!",
       }),
