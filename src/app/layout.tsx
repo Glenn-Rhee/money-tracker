@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
+import "react-day-picker/style.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import MediumSizeContent from "@/components/MediumSizeContent";

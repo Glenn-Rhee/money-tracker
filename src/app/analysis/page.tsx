@@ -35,9 +35,12 @@ export default function AnalysisPage() {
               >
                 <i className="ri-search-line"></i>
               </Link>
-              <div className="bg-maingreen rounded-lg aspect-square px-2 flex items-center justify-center">
+              <Link
+                href={"/analysis/calender"}
+                className="bg-maingreen rounded-lg aspect-square px-2 flex items-center justify-center"
+              >
                 <i className="ri-calendar-line"></i>
-              </div>
+              </Link>
             </div>
           </div>
           <BarChart />
