@@ -46,7 +46,7 @@ export default function DonutChart() {
       const y = (top + bottom) / 2;
 
       const image = new Image();
-      image.src = "/car.png";
+      image.src = "/Car.png";
 
       image.onload = () => {
         const size = 30;

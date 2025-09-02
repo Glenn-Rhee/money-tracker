@@ -66,7 +66,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-y-5 ms-1 h-full items-center justify-center">
             <div className="flex items-center gap-x-2">
               <Image
-                src={"/svg/salary.svg"}
+                src={"/svg/Salary.svg"}
                 alt="Salary icon"
                 width={33}
                 height={33}

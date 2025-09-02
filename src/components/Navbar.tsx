@@ -8,7 +8,7 @@ export default function Navbar() {
   if (pathName.includes("/auth") || pathName === "/boarding") return null;
 
   return (
-    <nav className="bg-lightgreen overflow-hidden grid grid-cols-5 gap-x-3 px-4 fixed bottom-0 left-0 right-0 rounded-tr-3xl pb-4 pt-2 rounded-tl-3xl">
+    <nav className="bg-lightgreen md:hidden overflow-hidden grid grid-cols-5 gap-x-3 px-4 fixed bottom-0 left-0 right-0 rounded-tr-3xl pb-4 pt-2 rounded-tl-3xl">
       <Link
         href={"/"}
         className={clsx(

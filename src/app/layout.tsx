@@ -4,6 +4,7 @@ import "./globals.css";
 import "remixicon/fonts/remixicon.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
+import MediumSizeContent from "@/components/MediumSizeContent";
 
 const geistPoppins = Poppins({
   variable: "--font-poppins",
@@ -34,7 +35,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistPoppins.variable} bg-maingreen antialiased`}>
         <Toaster />
-        {children}
+        <MediumSizeContent />
+        <div className="block md:hidden">{children}</div>
         <Navbar />
       </body>
     </html>
