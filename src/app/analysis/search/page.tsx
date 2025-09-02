@@ -26,7 +26,7 @@ export default function AnalysisSearchPage() {
           className="w-full bg-bggreen-whiteletter text-[#232323] focus:shadow-lg rounded-xl px-3 py-1 focus:outline-0 focus:border-0"
         />
       </div>
-      <Drawer className="h-[85vh] items-start justify-start px-4 py-4">
+      <Drawer className="h-[85vh] max-h-[40rem] items-start justify-start px-4 py-4">
         <Popover
           triggerElement={
             <>
