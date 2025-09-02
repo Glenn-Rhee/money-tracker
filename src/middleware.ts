@@ -9,7 +9,14 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl.pathname;
 
   if (!url.includes("/api")) {
-    if (url === "/" && !token) {
+    if (
+      (url === "/" ||
+        url.includes("/analysis") ||
+        url.includes("/categories") ||
+        url.includes("/profile") ||
+        url.includes("/transactions")) &&
+      !token
+    ) {
       return NextResponse.redirect(new URL("/boarding", req.url));
     }
 
@@ -19,11 +26,19 @@ export async function middleware(req: NextRequest) {
   }
 
   if (url.includes("/api")) {
-    if (url.includes("/auth") && token) {
+    if ((url === "/api/auth/login" || url === "/api/auth/signup") && token) {
       return NextResponse.json<ResponsePayload>({
         status: "failed",
         statusCode: 409,
         message: "You are already logged in.",
+      });
+    }
+
+    if (url === "/api/auth/logout" && !token) {
+      return NextResponse.json<ResponsePayload>({
+        status: "failed",
+        statusCode: 409,
+        message: "You have been logout!",
       });
     }
   }
