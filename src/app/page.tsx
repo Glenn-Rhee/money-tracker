@@ -55,10 +55,7 @@ export default function HomePage() {
           30% Of your expenses, looks good.
         </span>
       </div>
-      <Drawer
-        className="justify-start items-start px-5 max-h-[33rem]"
-        roundedSize="3rem"
-      >
+      <Drawer className="justify-start items-start px-5 max-h-[33rem]">
         <div className="mx-auto mt-4 bg-maingreen rounded-[31px] px-4 py-4 grid grid-cols-[9rem_1fr] w-full items-center">
           <div className="flex flex-col items-center border-r-4 w-full pr-6 border-white justify-center gap-y-2">
             <DonutChart />
