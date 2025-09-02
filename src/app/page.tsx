@@ -1,6 +1,8 @@
-import DonutChart from "@/components/DonutChart";
+import CardAnalysis from "@/components/CardAnalysis";
+import DonutChart from "@/components/charts/DonutChart";
 import Drawer from "@/components/Drawer";
-import ProgressBar from "@/components/ProgressBar";
+import Header from "@/components/Header";
+import LogoutBtn from "@/components/LogoutBtn";
 import ToggleGroup from "@/components/ToggleGroup";
 import { getGreeting } from "@/helper/getGreeting";
 import Image from "next/image";
@@ -9,52 +11,14 @@ import { Suspense } from "react";
 export default function HomePage() {
   return (
     <Suspense>
-      <header className="flex items-center justify-between p-4">
+      <Header>
         <div className="flex flex-col text-darkmode-green-bar">
           <span className="text-2xl font-bold">Hi, Welcome Back User</span>
           <span className="text-lg font-medium">Good {getGreeting()}</span>
         </div>
-        <button className="text-lg bg-lightgreen rounded-full aspect-square w-[30px] h-[30px] flex items-center justify-center">
-          <i className="ri-logout-box-r-line"></i>
-        </button>
-      </header>
-      <div className="w-[85vw] mt-2 max-w-[30rem] mx-auto space-y-1">
-        <div className="w-full justify-center gap-x-6 flex items-center">
-          <div className="space-y-1">
-            <div className="flex gap-x-2 items-center">
-              <Image
-                src={"/svg/income.svg"}
-                alt="Income icon"
-                width={20}
-                height={20}
-              />
-              <span className="text-sm text-lettersIcon">Total balance</span>
-            </div>
-            <span className="font-bold text-bggreen-whiteletter text-xl">
-              Rp 7.783.000
-            </span>
-          </div>
-          <div className="h-15 bg-bggreen-whiteletter w-[2px]" />
-          <div className="space-y-1">
-            <div className="flex gap-x-2 items-center">
-              <Image
-                src={"/svg/Expense.svg"}
-                alt="Expense icon"
-                width={20}
-                height={20}
-              />
-              <span className="text-sm text-lettersIcon">Total Expense</span>
-            </div>
-            <span className="font-bold text-oceanblue-btn text-xl">
-              -Rp 1.783.000
-            </span>
-          </div>
-        </div>
-        <ProgressBar />
-        <span className="text-sm text-bgdarkmode-letter">
-          30% Of your expenses, looks good.
-        </span>
-      </div>
+        <LogoutBtn />
+      </Header>
+      <CardAnalysis />
       <Drawer className="justify-start items-start px-5 max-h-[33rem]">
         <div className="mx-auto mt-4 bg-maingreen rounded-[31px] px-4 py-2 grid grid-cols-[9rem_1fr] w-full items-center">
           <div className="flex flex-col items-center border-r-4 w-full pr-6 border-white justify-center gap-y-2">
