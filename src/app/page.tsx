@@ -56,7 +56,7 @@ export default function HomePage() {
         </span>
       </div>
       <Drawer className="justify-start items-start px-5 max-h-[33rem]">
-        <div className="mx-auto mt-4 bg-maingreen rounded-[31px] px-4 py-4 grid grid-cols-[9rem_1fr] w-full items-center">
+        <div className="mx-auto mt-4 bg-maingreen rounded-[31px] px-4 py-2 grid grid-cols-[9rem_1fr] w-full items-center">
           <div className="flex flex-col items-center border-r-4 w-full pr-6 border-white justify-center gap-y-2">
             <DonutChart />
             <span className="text-center font-medium text-lettersIcon">
@@ -69,6 +69,7 @@ export default function HomePage() {
                 src={"/svg/Salary.svg"}
                 alt="Salary icon"
                 width={33}
+                className="w-[33px] h-[33px]"
                 height={33}
               />
               <div className="flex flex-col ms-1">
@@ -98,6 +99,78 @@ export default function HomePage() {
           </div>
         </div>
         <ToggleGroup />
+        <div className="h-40 w-full space-y-3 mt-1 overflow-y-scroll">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-3">
+              <div className="flex items-center justify-center p-2 bg-lightblue-btn rounded-lg">
+                <Image
+                  src={"/svg/Salary.svg"}
+                  alt="Salary icon"
+                  width={33}
+                  height={33}
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-bgdarkmode-letter">
+                  Salary
+                </span>
+                <span className="text-sm font-semibold text-[#0068FF]">
+                  30 April 2025, 18.27
+                </span>
+              </div>
+            </div>
+            <span className="font-semibold text-bgdarkmode-letter">
+              Rp 4.000.000
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-3">
+              <div className="flex items-center justify-center p-2 aspect-square bg-lightblue-btn rounded-lg">
+                <Image
+                  src={"/svg/groceries.svg"}
+                  alt="Groceries icon"
+                  width={33}
+                  height={33}
+                  className="w-[33px] h-[33px]"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-bgdarkmode-letter">
+                  Groceries
+                </span>
+                <span className="text-sm font-semibold text-[#0068FF]">
+                  24 April 2025, 17.00
+                </span>
+              </div>
+            </div>
+            <span className="font-semibold text-bgdarkmode-letter">
+              Rp 4.000.000
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-3">
+              <div className="flex items-center justify-center p-2 bg-lightblue-btn rounded-lg">
+                <Image
+                  src={"/svg/rent.svg"}
+                  alt="Rent icon"
+                  width={33}
+                  height={33}
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold text-bgdarkmode-letter">
+                  Rent
+                </span>
+                <span className="text-sm font-semibold text-[#0068FF]">
+                  30 April 2025, 18.27
+                </span>
+              </div>
+            </div>
+            <span className="font-semibold text-bgdarkmode-letter">
+              Rp 4.000.000
+            </span>
+          </div>
+        </div>
       </Drawer>
     </Suspense>
   );
