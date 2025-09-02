@@ -1,6 +1,6 @@
 export default function MediumSizeContent() {
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen h-screen md:flex flex-col justify-center hidden items-center">
       <h1 className="text-lettersIcon font-bold text-4xl">
         Please use your phone for better experience
       </h1>
