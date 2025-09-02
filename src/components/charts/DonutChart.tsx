@@ -13,7 +13,12 @@ import { useRef } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function DonutChart() {
+interface DonutChartProps {
+  text?: string;
+}
+
+export default function DonutChart(props: DonutChartProps) {
+  const { text } = props;
   const chartRef = useRef(null);
 
   const data: ChartData<"doughnut"> = {
@@ -44,14 +49,22 @@ export default function DonutChart() {
       } = chart;
       const x = (left + right) / 2;
       const y = (top + bottom) / 2;
-
-      const image = new Image();
-      image.src = "/Car.png";
-
-      image.onload = () => {
-        const size = 30;
-        ctx.drawImage(image, x - size / 2, y - size / 2, size, size);
-      };
+      if (text) {
+        ctx.save();
+        ctx.font = "600 16px Poppins";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#F1FFF3";
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      } else {
+        const image = new Image();
+        image.src = "/Car.png";
+        image.onload = () => {
+          const size = 30;
+          ctx.drawImage(image, x - size / 2, y - size / 2, size, size);
+        };
+      }
     },
   };
 

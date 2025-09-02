@@ -1,5 +1,6 @@
 import CardAnalysis from "@/components/CardAnalysis";
 import BarChart from "@/components/charts/BarChart";
+import DonutChart from "@/components/charts/DonutChart";
 import Drawer from "@/components/Drawer";
 import Header from "@/components/Header";
 import LogoutBtn from "@/components/LogoutBtn";
@@ -20,7 +21,7 @@ export default function AnalysisPage() {
         <LogoutBtn />
       </Header>
       <CardAnalysis />
-      <Drawer className="justify-start items-start px-5 max-h-[33rem]">
+      <Drawer className="justify-start overflow-y-auto items-start px-5 max-h-[33rem]">
         <ToggleGroup className="mt-4" withYear baseUrl="/analysis" />
         <div className="w-full mx-auto px-4 py-1 bg-lightgreen rounded-md">
           <div className="flex items-center justify-between">
@@ -62,6 +63,23 @@ export default function AnalysisPage() {
             <span className="text-oceanblue-btn font-bold text-lg">
               Rp 1.000
             </span>
+          </div>
+        </div>
+        <div className="mt-1 w-full">
+          <h6 className="font-semibold text-lg text-lettersIcon">My Target</h6>
+          <div className="w-full mt-1 mb-20 px-3 py-1 flex items-center justify-center gap-x-2">
+            <div className="bg-lightblue-btn aspect-square p-2 rounded-lg flex flex-col items-center justify-center w-1/2">
+              <DonutChart text="30%" />
+              <span className="font-semibold text-lg text-bggreen-whiteletter">
+                Travel
+              </span>
+            </div>
+            <div className="bg-lightblue-btn aspect-square p-2 rounded-lg flex flex-col items-center justify-center w-1/2">
+              <DonutChart text="50%" />
+              <span className="font-semibold text-lg text-bggreen-whiteletter">
+                Travel
+              </span>
+            </div>
           </div>
         </div>
       </Drawer>
