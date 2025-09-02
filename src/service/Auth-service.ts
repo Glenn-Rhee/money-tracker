@@ -62,9 +62,13 @@ export default class AuthService {
       .from("users")
       .select("*")
       .eq("email", data.email);
-
+    console.log(dataSupabase);
     if (!dataSupabase && error) {
       throw new ResponseError(500, "An error while login!");
+    }
+
+    if (dataSupabase.length === 0) {
+      throw new ResponseError(404, "Email is not found!");
     }
     const user = dataSupabase[0] as UsersModel;
     const isPasswordMatch = await bcrypt.compare(data.password, user.password);
