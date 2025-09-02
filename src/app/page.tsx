@@ -130,8 +130,8 @@ export default function HomePage() {
                 </span>
               </div>
             </div>
-            <span className="font-semibold text-bgdarkmode-letter">
-              Rp 4.000.000
+            <span className="font-semibold text-oceanblue-btn">
+              -Rp 4.000.000
             </span>
           </div>
         </div>

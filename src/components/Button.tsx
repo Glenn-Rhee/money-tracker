@@ -10,7 +10,7 @@ export default function Button(props: ButtonProps) {
     <button
       onClick={onClick}
       className={clsx(
-        "px-4 py-2 text-lettersIcon font-bold text-xl cursor-pointer active:scale-95 transition-all duration-100 rounded-3xl shadow-xl",
+        "px-4 py-1 text-lettersIcon font-bold text-xl cursor-pointer active:scale-95 transition-all duration-100 rounded-3xl shadow-xl",
         className,
         color
       )}

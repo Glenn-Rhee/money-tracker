@@ -31,18 +31,18 @@ export default function Popover(props: PopoverProps) {
   }, [handleClickOutside]);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         ref={triggerRef}
-        className="cursor-pointer"
+        className="cursor-pointer w-full"
       >
         {triggerElement}
       </button>
       {isOpen && (
         <div
-          className="absolute cursor-auto border-[#2c2f4f] border rounded-xl bg-[#1d293d] top-full left-1/2 z-20 -translate-x-1/2 p-3 w-[20rem]"
+          className="absolute cursor-auto rounded-lg mt-1 bg-maingreen top-full left-1/2 z-20 -translate-x-1/2 px-3 py-2 w-full"
           ref={popoverRef}
         >
           {children}

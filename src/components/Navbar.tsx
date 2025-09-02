@@ -22,7 +22,7 @@ export default function Navbar() {
         href={"/analysis"}
         className={clsx(
           "text-3xl p-2 justify-self-center px-4 rounded-lg",
-          pathName === "/analysis" ? "bg-maingreen" : ""
+          pathName.includes("/analysis") ? "bg-maingreen" : ""
         )}
       >
         <i className="ri-line-chart-line"></i>

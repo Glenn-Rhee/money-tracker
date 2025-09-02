@@ -106,7 +106,7 @@ export default function SignUpPage() {
             id="dateOfBirth"
             label="Date Of Birth"
             type="date"
-            placeholder="DD / MM / YYYY"
+            placeholder="YYYY / MM / DD"
             error={form.formState.errors.dateOfBirth?.message}
           />
 

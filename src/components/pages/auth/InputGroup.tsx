@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 
 type InputGroupProps = React.InputHTMLAttributes<HTMLInputElement> & {
@@ -12,7 +13,7 @@ export default function InputGroup(props: InputGroupProps) {
 
   return (
     <div className="flex flex-col gap-y-2">
-      <label className="text-lettersIcon text-sm font-medium" htmlFor={id}>
+      <label className="text-lettersIcon text-sm font-semibold" htmlFor={id}>
         {label}
       </label>
       <div className="relative">
@@ -23,7 +24,7 @@ export default function InputGroup(props: InputGroupProps) {
           }
           placeholder={placeholder}
           {...rest}
-          className="w-full text-sm text-lettersIcon bg-lightgreen px-6 py-3 rounded-3xl shadow-md focus:outline focus:border-0 focus:outline-darkmode-green-bar"
+          className="w-full text-sm text-lettersIcon bg-lightgreen px-4 py-3 rounded-3xl shadow-md focus:outline focus:border-0 focus:outline-darkmode-green-bar"
         />
         {type === "password" ? (
           <button

@@ -1,3 +1,4 @@
+import BackBtn from "@/components/BackBtn";
 import CardAnalysis from "@/components/CardAnalysis";
 import BarChart from "@/components/charts/BarChart";
 import DonutChart from "@/components/charts/DonutChart";
@@ -6,15 +7,14 @@ import Header from "@/components/Header";
 import LogoutBtn from "@/components/LogoutBtn";
 import ToggleGroup from "@/components/ToggleGroup";
 import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export default function AnalysisPage() {
   return (
     <Suspense>
       <Header>
-        <button className="text-2xl text-bggreen-whiteletter">
-          <i className="ri-arrow-left-line"></i>
-        </button>
+        <BackBtn />
         <span className="text-xl font-bold text-darkmode-green-bar">
           Analysis
         </span>
@@ -29,9 +29,12 @@ export default function AnalysisPage() {
               Income & Expenses
             </span>
             <div className="flex items-center gap-x-1">
-              <div className="bg-maingreen rounded-lg aspect-square px-2 flex items-center justify-center">
+              <Link
+                href={"/analysis/search"}
+                className="bg-maingreen rounded-lg aspect-square px-2 flex items-center justify-center"
+              >
                 <i className="ri-search-line"></i>
-              </div>
+              </Link>
               <div className="bg-maingreen rounded-lg aspect-square px-2 flex items-center justify-center">
                 <i className="ri-calendar-line"></i>
               </div>
@@ -77,7 +80,7 @@ export default function AnalysisPage() {
             <div className="bg-lightblue-btn aspect-square p-2 rounded-lg flex flex-col items-center justify-center w-1/2">
               <DonutChart text="50%" />
               <span className="font-semibold text-lg text-bggreen-whiteletter">
-                Travel
+                Car
               </span>
             </div>
           </div>
