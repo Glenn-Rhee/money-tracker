@@ -4,10 +4,11 @@ import ProgressBar from "@/components/ProgressBar";
 import ToggleGroup from "@/components/ToggleGroup";
 import { getGreeting } from "@/helper/getGreeting";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default function HomePage() {
   return (
-    <>
+    <Suspense>
       <header className="flex items-center justify-between p-4">
         <div className="flex flex-col text-darkmode-green-bar">
           <span className="text-2xl font-bold">Hi, Welcome Back User</span>
@@ -101,6 +102,6 @@ export default function HomePage() {
         </div>
         <ToggleGroup />
       </Drawer>
-    </>
+    </Suspense>
   );
 }
