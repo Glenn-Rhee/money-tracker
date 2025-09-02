@@ -34,6 +34,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="shortcut icon"
+          href="/logo-main-green.png"
+          type="image/x-icon"
+        />
+      </head>
       <body className={`${geistPoppins.variable} bg-maingreen antialiased`}>
         <Toaster />
         <MediumSizeContent />
