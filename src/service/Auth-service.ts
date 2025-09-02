@@ -1,6 +1,7 @@
 import { ResponseError } from "@/error/Response-Error";
 import JWT from "@/lib/jwt";
-import { prisma } from "@/lib/prisma";
+import { supabase } from "@/lib/supabaseClient";
+import { UsersModel } from "@/model/users-model";
 import { CreateUser, LoginUser, ResponsePayload } from "@/types";
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
@@ -11,35 +12,39 @@ export default class AuthService {
     data: Omit<CreateUser, "confirmPassword">
   ): Promise<ResponsePayload> {
     const cookieStore = await cookies();
-    let user = await prisma.user.findFirst({ where: { email: data.email } });
-    if (user) {
-      throw new ResponseError(409, "Email is registered!");
+    const { data: dataSupabase, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", data.email);
+
+    if (!dataSupabase && error) {
+      throw new ResponseError(500, "An error while sign up!");
     }
 
-    user = await prisma.user.findFirst({
-      where: { mobileNumber: data.mobileNumber },
-    });
-
-    if (user) {
-      throw new ResponseError(409, "Mobile phone is registered!");
+    if (dataSupabase.length > 0) {
+      throw new ResponseError(409, "Email is already registered!");
     }
 
     const encryptPass = await bcrypt.hash(data.password, 10);
 
-    const createdUser = await prisma.user.create({
-      data: {
+    const createdUser = await supabase.from("users").insert<UsersModel>([
+      {
         id: uuidv4(),
-        fullName: data.fullName,
+        fullname: data.fullName,
+        dateofbirth: data.dateOfBirth,
         email: data.email,
-        mobileNumber: data.mobileNumber,
-        dateOfBirth: data.dateOfBirth,
+        mobilenumber: data.mobileNumber,
         password: encryptPass,
       },
-    });
+    ]);
+
+    if (createdUser.error) {
+      throw new ResponseError(500, "An error while sign up!");
+    }
 
     const token = JWT.signIn({
-      email: createdUser.email,
-      password: createdUser.password,
+      email: data.email,
+      password: encryptPass,
     });
 
     cookieStore.set("token", token);
@@ -53,11 +58,15 @@ export default class AuthService {
 
   static async login(data: LoginUser): Promise<ResponsePayload> {
     const cookieStore = await cookies();
-    const user = await prisma.user.findFirst({ where: { email: data.email } });
-    if (!user) {
-      throw new ResponseError(404, "Email not found!");
-    }
+    const { data: dataSupabase, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", data.email);
 
+    if (!dataSupabase && error) {
+      throw new ResponseError(500, "An error while login!");
+    }
+    const user = dataSupabase[0] as UsersModel;
     const isPasswordMatch = await bcrypt.compare(data.password, user.password);
     if (!isPasswordMatch) {
       throw new ResponseError(401, "Wrong Password!");

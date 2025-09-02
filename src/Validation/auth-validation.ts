@@ -25,7 +25,7 @@ export class AuthValidation {
       .string({ error: "Please fill password properly" })
       .min(8, { error: "Minimum length of password is 8" }),
     confirmPassword: z
-      .string({ error: "Please fill password properly" })
+      .string({ error: "Please fill confirmation password properly" })
       .min(8, { error: "Minimum length of password is 8" }),
   });
 }

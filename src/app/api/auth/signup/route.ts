@@ -21,6 +21,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const response = await AuthService.CreateUser(data);
     return NextResponse.json<ResponsePayload>(response);
   } catch (error) {
+    console.log("Error at POST /api/auth/signup: ", error);
     if (error instanceof ResponseError) {
       return NextResponse.json<ResponsePayload>({
         status: "failed",
@@ -37,7 +38,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       });
     }
 
-    console.log("Error at POST /api/auth/signup: ", error);
     return NextResponse.json<ResponsePayload>({
       status: "failed",
       statusCode: 500,

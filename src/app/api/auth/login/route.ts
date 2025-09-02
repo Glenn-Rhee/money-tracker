@@ -30,7 +30,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       });
     }
 
-    console.log("Error at POST /api/auth/signup: ", error);
+    console.log("Error at POST /api/auth/login: ", error);
     return NextResponse.json<ResponsePayload>({
       status: "failed",
       statusCode: 500,
