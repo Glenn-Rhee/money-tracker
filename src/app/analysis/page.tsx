@@ -1,3 +1,4 @@
+"use client";
 import BackBtn from "@/components/BackBtn";
 import CardAnalysis from "@/components/CardAnalysis";
 import BarChart from "@/components/charts/BarChart";
@@ -6,9 +7,40 @@ import Drawer from "@/components/Drawer";
 import Header from "@/components/Header";
 import LogoutBtn from "@/components/LogoutBtn";
 import ToggleGroup from "@/components/ToggleGroup";
+import { data } from "@/utils/data-tracker";
+import { ChartOptions, Plugin } from "chart.js";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+
+const options: ChartOptions<"doughnut"> = {
+  cutout: "90%",
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+  },
+};
+
+function getCenterIcon(text: string): Plugin {
+  return {
+    id: "centerIcon",
+    afterDraw(chart) {
+      const {
+        ctx,
+        chartArea: { left, right, top, bottom },
+      } = chart;
+      const x = (left + right) / 2;
+      const y = (top + bottom) / 2;
+      ctx.save();
+      ctx.font = "600 16px Poppins";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#F1FFF3";
+      ctx.fillText(text, x, y);
+      ctx.restore();
+    },
+  };
+}
 
 export default function AnalysisPage() {
   return (
@@ -75,13 +107,21 @@ export default function AnalysisPage() {
           <h6 className="font-semibold text-lg text-lettersIcon">My Target</h6>
           <div className="w-full mt-1 mb-20 px-3 py-1 flex items-center justify-center gap-x-2">
             <div className="bg-lightblue-btn aspect-square p-2 rounded-lg flex flex-col items-center justify-center w-1/2">
-              <DonutChart text="30%" />
+              <DonutChart
+                data={data}
+                options={options}
+                centerIcon={getCenterIcon("30%")}
+              />
               <span className="font-semibold text-lg text-bggreen-whiteletter">
                 Travel
               </span>
             </div>
             <div className="bg-lightblue-btn aspect-square p-2 rounded-lg flex flex-col items-center justify-center w-1/2">
-              <DonutChart text="50%" />
+              <DonutChart
+                data={data}
+                options={options}
+                centerIcon={getCenterIcon("60%")}
+              />
               <span className="font-semibold text-lg text-bggreen-whiteletter">
                 Car
               </span>

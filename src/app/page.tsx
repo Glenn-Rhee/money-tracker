@@ -1,3 +1,4 @@
+"use client";
 import CardAnalysis from "@/components/CardAnalysis";
 import DonutChart from "@/components/charts/DonutChart";
 import Drawer from "@/components/Drawer";
@@ -5,9 +6,37 @@ import Header from "@/components/Header";
 import LogoutBtn from "@/components/LogoutBtn";
 import ToggleGroup from "@/components/ToggleGroup";
 import { getGreeting } from "@/helper/getGreeting";
-import Image from "next/image";
+import { data } from "@/utils/data-tracker";
+import { ChartOptions, Plugin } from "chart.js";
+import NextImage from "next/image";
 import { Suspense } from "react";
 
+const options: ChartOptions<"doughnut"> = {
+  cutout: "90%",
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+  },
+};
+
+const centerIcon: Plugin = {
+  id: "centerIcon",
+  afterDraw(chart) {
+    const {
+      ctx,
+      chartArea: { left, right, top, bottom },
+    } = chart;
+    const x = (left + right) / 2;
+    const y = (top + bottom) / 2;
+
+    const image = new Image();
+    image.src = "/Car.png";
+    image.onload = () => {
+      const size = 30;
+      ctx.drawImage(image, x - size / 2, y - size / 2, size, size);
+    };
+  },
+};
 export default function HomePage() {
   return (
     <Suspense>
@@ -22,14 +51,14 @@ export default function HomePage() {
       <Drawer className="justify-start items-start px-5 max-h-[33rem]">
         <div className="mx-auto mt-4 bg-maingreen rounded-[31px] px-4 py-2 grid grid-cols-[9rem_1fr] w-full items-center">
           <div className="flex flex-col items-center border-r-4 w-full pr-6 border-white justify-center gap-y-2">
-            <DonutChart />
+            <DonutChart data={data} options={options} centerIcon={centerIcon} />
             <span className="text-center font-medium text-lettersIcon">
               Savings On Goals
             </span>
           </div>
           <div className="flex flex-col gap-y-5 ms-1 h-full items-center justify-center">
             <div className="flex items-center gap-x-2">
-              <Image
+              <NextImage
                 src={"/svg/Salary.svg"}
                 alt="Salary icon"
                 width={33}
@@ -67,7 +96,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-3">
               <div className="flex items-center justify-center p-2 bg-lightblue-btn rounded-lg">
-                <Image
+                <NextImage
                   src={"/svg/Salary.svg"}
                   alt="Salary icon"
                   width={33}
@@ -90,7 +119,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-3">
               <div className="flex items-center justify-center p-2 aspect-square bg-lightblue-btn rounded-lg">
-                <Image
+                <NextImage
                   src={"/svg/groceries.svg"}
                   alt="Groceries icon"
                   width={33}
@@ -114,7 +143,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-3">
               <div className="flex items-center justify-center p-2 bg-lightblue-btn rounded-lg">
-                <Image
+                <NextImage
                   src={"/svg/rent.svg"}
                   alt="Rent icon"
                   width={33}

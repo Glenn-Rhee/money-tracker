@@ -62,7 +62,6 @@ export default class AuthService {
       .from("users")
       .select("*")
       .eq("email", data.email);
-    console.log(dataSupabase);
     if (!dataSupabase && error) {
       throw new ResponseError(500, "An error while login!");
     }
