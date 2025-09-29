@@ -1,5 +1,7 @@
 "use client";
+import Card from "@/components/Card";
 import CardAnalysis from "@/components/CardAnalysis";
+import CardShell from "@/components/CardShell";
 import DonutChart from "@/components/charts/DonutChart";
 import Drawer from "@/components/Drawer";
 import Header from "@/components/Header";
@@ -92,78 +94,12 @@ export default function HomePage() {
           </div>
         </div>
         <ToggleGroup />
-        <div className="h-40 w-full space-y-3 mt-1 overflow-y-scroll">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-3">
-              <div className="flex items-center justify-center p-2 bg-lightblue-btn rounded-lg">
-                <NextImage
-                  src={"/svg/Salary.svg"}
-                  alt="Salary icon"
-                  width={33}
-                  height={33}
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold text-bgdarkmode-letter">
-                  Salary
-                </span>
-                <span className="text-sm font-semibold text-[#0068FF]">
-                  30 April 2025, 18.27
-                </span>
-              </div>
-            </div>
-            <span className="font-semibold text-bgdarkmode-letter">
-              Rp 4.000.000
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-3">
-              <div className="flex items-center justify-center p-2 aspect-square bg-lightblue-btn rounded-lg">
-                <NextImage
-                  src={"/svg/groceries.svg"}
-                  alt="Groceries icon"
-                  width={33}
-                  height={33}
-                  className="w-[33px] h-[33px]"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold text-bgdarkmode-letter">
-                  Groceries
-                </span>
-                <span className="text-sm font-semibold text-[#0068FF]">
-                  24 April 2025, 17.00
-                </span>
-              </div>
-            </div>
-            <span className="font-semibold text-bgdarkmode-letter">
-              Rp 4.000.000
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-3">
-              <div className="flex items-center justify-center p-2 bg-lightblue-btn rounded-lg">
-                <NextImage
-                  src={"/svg/rent.svg"}
-                  alt="Rent icon"
-                  width={33}
-                  height={33}
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold text-bgdarkmode-letter">
-                  Rent
-                </span>
-                <span className="text-sm font-semibold text-[#0068FF]">
-                  30 April 2025, 18.27
-                </span>
-              </div>
-            </div>
-            <span className="font-semibold text-oceanblue-btn">
-              -Rp 4.000.000
-            </span>
-          </div>
-        </div>
+        <CardShell isScrolling>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </CardShell>
       </Drawer>
     </Suspense>
   );
