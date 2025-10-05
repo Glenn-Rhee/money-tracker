@@ -40,7 +40,7 @@ export default function Navbar() {
         href={"/categories"}
         className={clsx(
           "text-3xl p-2 justify-self-center px-4 rounded-lg",
-          pathName === "/categories" ? "bg-maingreen" : ""
+          pathName.includes("/categories") ? "bg-maingreen" : ""
         )}
       >
         <i className="ri-stack-line"></i>

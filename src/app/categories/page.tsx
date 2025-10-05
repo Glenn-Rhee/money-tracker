@@ -3,24 +3,9 @@ import CardAnalysis from "@/components/CardAnalysis";
 import Drawer from "@/components/Drawer";
 import Header from "@/components/Header";
 import LogoutBtn from "@/components/LogoutBtn";
+import { icons } from "@/utils/icons";
 import Link from "next/link";
 import { Suspense } from "react";
-
-interface Icon {
-  icon: string;
-  label: string;
-}
-
-const icons: Icon[] = [
-  { icon: "restaurant-line", label: "Food" },
-  { icon: "bus-line", label: "Transport" },
-  { icon: "capsule-line", label: "Medicine" },
-  { icon: "shopping-basket-line", label: "Groceries" },
-  { icon: "key-line", label: "Rent" },
-  { icon: "gift-line", label: "Gifts" },
-  { icon: "coins-line", label: "Savings" },
-  { icon: "ticket-line", label: "Entertainment" },
-];
 
 export default function CategoriesPage() {
   return (

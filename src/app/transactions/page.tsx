@@ -18,7 +18,7 @@ export default function TransactionsPage() {
         <LogoutBtn />
       </Header>
       <TabTransaction />
-      <Drawer className="justify-start overflow-y-auto items-start px-5 max-h-[32rem]">
+      <Drawer className="justify-start overflow-y-auto items-start px-5 max-h-[31rem]">
         <div className="w-full py-3">
           <div className="w-full flex items-center justify-between">
             <span className="font-semibold text-sm text-lettersIcon">

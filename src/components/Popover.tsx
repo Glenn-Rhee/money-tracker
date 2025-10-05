@@ -1,53 +1,117 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
-
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { createPortal } from "react-dom";
+import clsx from "clsx";
+import { usePopover } from "@/store/popover-store";
 interface PopoverProps {
   triggerElement: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function Popover(props: PopoverProps) {
-  const { triggerElement, children } = props;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { triggerElement, children, className } = props;
+  const { openId, setOpenId, setAutoFocus } = usePopover();
+  const id = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (
-      popoverRef.current &&
-      !popoverRef.current.contains(event.target as Node) &&
-      triggerRef.current &&
-      !triggerRef.current.contains(event.target as Node)
-    ) {
-      setIsOpen(false);
-    }
-  }, []);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    setMounted(true);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenId(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [setOpenId]);
+
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      const popoverEl = popoverRef.current;
+      const triggerEl = triggerRef.current;
+      const target = event.target as Node;
+
+      if (popoverEl && popoverEl.contains(target)) return;
+      if (triggerEl && triggerEl.contains(target)) return;
+
+      setOpenId(null);
+    },
+    [setOpenId]
+  );
+
+  useEffect(() => {
+    if (openId) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [openId]);
+
+  useEffect(() => {
+    if (openId === id) {
+      const el = document.querySelector("#title") as HTMLInputElement;
+      const elEdit = document.querySelector("#editTitle") as HTMLInputElement;
+      el?.focus();
+      elEdit?.focus();
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [handleClickOutside]);
+  }, [openId, id, handleClickOutside]);
+
+  const content = (
+    <motion.div
+      initial={{ display: "none" }}
+      variants={{
+        show: { display: "flex" },
+        hide: { display: "none" },
+      }}
+      animate={openId === id ? "show" : "hide"}
+      className="fixed inset-0 z-30 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+    >
+      <motion.div
+        ref={popoverRef}
+        initial={{ scale: 0.8, opacity: 0 }}
+        variants={{
+          show: { scale: 1, opacity: 1 },
+          hide: { scale: 0.8, opacity: 0 },
+        }}
+        animate={openId === id ? "show" : "hide"}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="cursor-auto w-full max-w-[20rem] rounded-2xl bg-white px-6 py-5"
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
 
   return (
     <div className="relative w-full">
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          setOpenId(id);
+          setAutoFocus(true);
+        }}
         ref={triggerRef}
-        className="cursor-pointer w-full"
+        className={clsx("cursor-pointer w-full", className)}
       >
         {triggerElement}
       </button>
-      {isOpen && (
-        <div
-          className="absolute cursor-auto rounded-lg mt-1 bg-maingreen top-full left-1/2 z-20 -translate-x-1/2 px-3 py-2 w-full"
-          ref={popoverRef}
-        >
-          {children}
-        </div>
-      )}
+
+      {mounted && typeof window !== "undefined"
+        ? createPortal(content, document.body)
+        : null}
     </div>
   );
 }
